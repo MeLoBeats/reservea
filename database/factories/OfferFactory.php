@@ -22,7 +22,7 @@ class OfferFactory extends Factory
     {
         return [
             "title" => fake()->sentence,
-            "description" => fake()->paragraphs,
+            "description" => fake()->paragraphs(3, true),
             "price" => rand(60, 2000),
             "category_id" => FactoryHelper::getRandomIdOrCreate(Category::class),
             "address_id" => FactoryHelper::getRandomIdOrCreate(Address::class),

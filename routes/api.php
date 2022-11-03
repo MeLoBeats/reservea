@@ -1,7 +1,10 @@
 <?php
 
 use App\Models\Address;
+use App\Models\Category;
+use App\Models\Image;
 use App\Models\Offer;
+use App\Models\User;
 use Database\Factories\Helpers\FactoryHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +25,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('ok', function () {
-    $count = count(Offer::all());
-    return FactoryHelper::getRandomIdOrCreate(Offer::class);
+    // $count = count(Offer::all());
+    // $offer- 
+    $offer = Offer::all()->first();
+    $image = Image::all()->first();
+    $offer->images()->save($image);
+    return ($offer->images);
 });

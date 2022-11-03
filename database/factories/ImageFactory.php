@@ -23,7 +23,7 @@ class ImageFactory extends Factory
 
         return [
             "url" => fake()->imageUrl(),
-            "imageable_id" => $imageable::factory(),
+            "imageable_id" => $imageable::factory()->create()->id,
             "imageable_type" => $imageable,
         ];
     }
