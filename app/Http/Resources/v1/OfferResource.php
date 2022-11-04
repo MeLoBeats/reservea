@@ -22,6 +22,10 @@ class OfferResource extends JsonResource
             "categoryId" => $this->category_id,
             "addressId" => $this->address_id,
             "userId" => $this->user_id,
+            "user" => $this->whenLoaded('user'),
+            "address" => $this->whenLoaded('address'),
+            "category" => $this->whenLoaded('category'),
+            "images" => $this->whenLoaded('images'),
         ];
     }
 }

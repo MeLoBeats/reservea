@@ -3,12 +3,24 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Query\QueryBuilder;
+use App\Http\Resources\v1\OfferCollection;
 use App\Http\Resources\v1\OfferResource;
 use App\Models\Offer;
+use App\Repository\V1\OfferRepository;
 use Illuminate\Http\Request;
 
 class OfferController extends Controller
 {
+
+    public function __construct(
+        private OfferRepository $repo,
+        private QueryBuilder $queryBuilder
+    ) {
+        $this->repo = new OfferRepository();
+        $this->queryBuilder = new QueryBuilder();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,8 +28,9 @@ class OfferController extends Controller
      */
     public function index()
     {
-        $offers = Offer::paginate();
-        return OfferResource::collection($offers);
+        $queries = $this->queryBuilder->resolve(request()->query());
+        $offers = $this->repo->getAll($queries);
+        return new OfferCollection($offers);
     }
 
     /**
@@ -37,9 +50,11 @@ class OfferController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Offer $offer)
     {
-        //
+        $queries = request()->query();
+        $offer->load($queries['with'] ?? []);
+        return new OfferResource($offer);
     }
 
     /**
