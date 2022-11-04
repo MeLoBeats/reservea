@@ -24,11 +24,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('ok', function () {
-    // $count = count(Offer::all());
-    // $offer- 
-    $offer = Offer::all()->first();
-    $image = Image::all()->first();
-    $offer->images()->save($image);
-    return ($offer->images);
-});
+require __DIR__ . DIRECTORY_SEPARATOR . 'api' . DIRECTORY_SEPARATOR . 'v1' . DIRECTORY_SEPARATOR . 'api.php';
