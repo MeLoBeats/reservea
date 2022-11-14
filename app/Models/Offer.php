@@ -44,9 +44,9 @@ class Offer extends Model
         return $this->hasOne(Category::class);
     }
 
-    public function address(): HasOne
+    public function address(): BelongsTo
     {
-        return $this->hasOne(Address::class);
+        return $this->belongsTo(Address::class);
     }
 
     public function user(): BelongsTo

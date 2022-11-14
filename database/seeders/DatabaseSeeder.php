@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\Address;
 use App\Models\Category;
 use App\Models\Image;
+use App\Models\Offer;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -25,9 +26,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         Category::factory(10);
-        User::factory()->count(10)->create();
-        \App\Models\Offer::factory(10)->create();
         Address::factory(10)->create();
-        Image::factory(10)->create();
+        Image::factory(100)->create();
     }
 }
